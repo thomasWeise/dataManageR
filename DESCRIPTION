@@ -1,0 +1,34 @@
+Package: dataManageR
+Type: Package
+Title: An R Package for Loading and Processing Hierarchically Structured and Named Datasets Annotated with Features
+Version: 0.8.0
+Author: Dr. Thomas Weise <tweise@hfuu.edu.cn>
+Maintainer: Dr. Thomas Weise <tweise@hfuu.edu.cn>
+Description: The goal of this package is to provide a simple way to load and process hierarchically structured and named datasets.
+License: LGPL-3
+Encoding: UTF-8
+URL: http://www.github.com/thomasWeise/dataManageR
+BugReports: http://www.github.com/thomasWeise/dataManageR/issues
+Imports: data.table (>= 1.10.4.3),
+         methods (>= 3.3.2),
+         utils (>= 3.3.2),
+         utilizeR (>= 0.8.4)
+Suggests: testthat (>= 2.0.0),
+          roxygen2 (>= 6.0.1)
+Depends: R (>= 3.3.0)
+ByteCompile: true
+LazyData: true
+Remotes: github::thomasWeise/utilizeR
+RoxygenNote: 6.0.1.9000
+Collate: 
+    'dataset.R'
+    'names.R'
+    'featureValues.R'
+    'featureNames.R'
+    'asDataFrame.R'
+    'featuresTxtLoader.R'
+    'featuresDefaultLoader.R'
+    'joinNames.R'
+    'makeNamesUnique.R'
+    'mergeBySelection.R'
+    'mergeByFeatures.R'
