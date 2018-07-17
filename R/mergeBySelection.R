@@ -3,7 +3,7 @@
 
 # the internal merge-by-selection method, which already requires having the right features
 #' @include makeNamesUnique.R
-.merge.by.selection <- function(datasets, selection, data.name, features.unique, data.merge, data.create) {
+.datasets.merge.by.selection <- function(datasets, selection, data.name, features.unique, data.merge, data.create) {
   # if there are no datasets, we are done here
   n <- length(datasets);
   if((length(n) <= 0L) || (length(selection) <= 0L)) {
@@ -19,7 +19,7 @@
     sel.data <- data.merge(lapply(X=sel, FUN=function(m) m@data));
     sel.data <- force(sel.data);
 
-    # obtain the features for these models
+    # obtain the features for these datasets
     sel.features <- features.unique[[sel.index]];
     sel.features <- force(sel.features);
 
@@ -28,16 +28,16 @@
                         sel.features);
     sel.name   <- force(sel.name);
 
-    # create the new, merged Models instance
+    # create the new, merged dataset instance
     data.create(name=sel.name,
-          features=sel.features,
-          data=sel.data)
+                features=sel.features,
+                data=sel.data)
   });
 
   # create result list
   result <- unname(unlist(result, recursive = TRUE));
   # make sure that all datasets have unique names
-  result <- dataset.make.names.unique(result);
+  result <- datasets.make.names.unique(result);
   result <- force(result);
   return(result);
 }
@@ -65,7 +65,7 @@
 #' @include joinNames.R
 datasets.merge.by.selection <- function(datasets,
                                         selection=seq_along(datasets),
-                                        data.name=dataset.joinNames,
+                                        data.name=datasets.joinNames,
                                         data.merge=.data.merge,
                                         data.create=dataset.new) {
   # if there are no datasets, we are done here
@@ -74,15 +74,15 @@ datasets.merge.by.selection <- function(datasets,
     return(list());
   }
 
-  # invoke the builder based on the selected models, but first compute the
+  # invoke the builder based on the selected datasets, but first compute the
   # selected features
-  return(.datasets.merge.by.selection(models=models,
+  return(.datasets.merge.by.selection(datasets=datasets,
                                       selection=selection,
                                       data.name=data.name,
                                       features.unique=lapply(X=selection,
    FUN=function(sel) {
      # try to get the feature values for the i'th selection
-     # these will be the values that all models have in common
+     # these will be the values that all datasets have in common
      if(length(sel) == 1L) {
      # only 1 model? return its features as-is
        return(datasets[[sel[[1L]]]]@features);

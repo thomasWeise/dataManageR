@@ -5,7 +5,7 @@
 \title{Create a Combination or Selection of \code{\link{dataset}s}}
 \usage{
 datasets.merge.by.features(datasets, features.ignore = NULL,
-  features.keep = NULL, data.name = dataset.joinNames,
+  features.keep = NULL, data.name = datasets.joinNames,
   data.merge = .data.merge, data.create = dataset.new)
 }
 \arguments{
@@ -31,7 +31,7 @@ a list of two components, \code{datasets} and \code{selection}. The
   \code{datasets} component contains instances of \code{\link{dataset}} where
   all names have been transformed according to \code{data.name} and the features
   have been selected according to \code{features.ignore} and
-  \code{features.keep} where the \code{models} members of instances with the
+  \code{features.keep} where the \code{data} members of instances with the
   same features have been merged. The \code{selection} component contains,
   for each element of \code{datasets}, a vector with indexes into the input
   \code{datasets} list from where its components stem

@@ -5,7 +5,7 @@
 \title{Create a Combination or Selection of \code{\link{dataset}s}}
 \usage{
 datasets.merge.by.selection(datasets, selection = seq_along(datasets),
-  data.name = dataset.joinNames, data.merge = .data.merge,
+  data.name = datasets.joinNames, data.merge = .data.merge,
   data.create = dataset.new)
 }
 \arguments{

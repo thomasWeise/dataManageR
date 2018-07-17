@@ -1,8 +1,6 @@
 library("dataManageR")
 context("datasets.joinNames")
 
-library(regressoR)
-
 test_that("Test datasets.joinNames", {
   expect_identical(datasets.joinNames("a"), "a");
   expect_identical(datasets.joinNames("a/n"), "a/n");

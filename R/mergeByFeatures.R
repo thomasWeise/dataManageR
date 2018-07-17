@@ -19,7 +19,7 @@
 #'   \code{datasets} component contains instances of \code{\link{dataset}} where
 #'   all names have been transformed according to \code{data.name} and the features
 #'   have been selected according to \code{features.ignore} and
-#'   \code{features.keep} where the \code{models} members of instances with the
+#'   \code{features.keep} where the \code{data} members of instances with the
 #'   same features have been merged. The \code{selection} component contains,
 #'   for each element of \code{datasets}, a vector with indexes into the input
 #'   \code{datasets} list from where its components stem
@@ -27,10 +27,10 @@
 datasets.merge.by.features <- function(datasets,
                                        features.ignore=NULL,
                                        features.keep=NULL,
-                                       data.name=dataset.joinNames,
+                                       data.name=datasets.joinNames,
                                        data.merge=.data.merge,
                                        data.create=dataset.new) {
-  # if there are no models, we are done here
+  # if there are no datasets, we are done here
   n <- length(datasets);
   if(length(n) <= 0L) {
     .tmp <- list();
@@ -78,12 +78,12 @@ datasets.merge.by.features <- function(datasets,
                 which(vapply(X=features.all, FUN=identical, FUN.VALUE=FALSE, features)));
 
   # invoke the merging algorithm
-  result <- .Models.merge.by.selection(datasets=datasets,
-                                       selection=selection,
-                                       data.name=data.name,
-                                       features.unique=features.unique,
-                                       data.merge=data.merge,
-                                       data.create=data.create);
+  result <- .datasets.merge.by.selection(datasets=datasets,
+                                         selection=selection,
+                                         data.name=data.name,
+                                         features.unique=features.unique,
+                                         data.merge=data.merge,
+                                         data.create=data.create);
   result <- force(result);
   return(list(datasets=result, selection=selection));
 }

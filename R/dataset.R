@@ -67,14 +67,15 @@ dataset.new <- function(name, features, data) {
   if(length(features) > 1L) {
     features <- features[order(names(features))];
   }
-  result <- new("dataset", name=name,
+  result <- new("dataset",
+                name=name,
                 features=features,
                 data=data);
-  result <- force(result);
-  result@name <- force(result@name);
+  result          <- force(result);
+  result@name     <- force(result@name);
   result@features <- force(result@features);
-  result@data <- force(result@data);
-  result <- force(result);
+  result@data     <- force(result@data);
+  result          <- force(result);
   validObject(result);
   return(result);
 }
