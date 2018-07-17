@@ -5,7 +5,7 @@
 \title{Create a Combination or Selection of \code{\link{dataset}s}}
 \usage{
 datasets.merge.by.selection(datasets, selection = seq_along(datasets),
-  data.name = datasets.joinNames, data.merge = .data.merge,
+  data.name = datasets.names.join, data.merge = .data.merge,
   data.create = dataset.new)
 }
 \arguments{
@@ -15,7 +15,7 @@ datasets.merge.by.selection(datasets, selection = seq_along(datasets),
 in the same index are joined}
 
 \item{data.name}{a function used to join names of datasets that now have
-identical features, see \code{\link{datasets.joinNames}} for documentation}
+identical features, see \code{\link{datasets.names.join}} for documentation}
 
 \item{data.merge}{a function for merging the \code{data} lists; by default
 \code{unlist(x, recursive=FALSE)}}

@@ -22,7 +22,7 @@ Remotes: github::thomasWeise/utilizeR
 RoxygenNote: 6.0.1.9000
 Collate: 
     'dataset.R'
-    'names.R'
+    'getNames.R'
     'featureValues.R'
     'featureNames.R'
     'asDataFrame.R'

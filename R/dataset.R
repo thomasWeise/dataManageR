@@ -1,7 +1,8 @@
 #' @title A \code{dataset} is an Object  Identified by a Name and a List of
 #'   Features
 #' @description Each instance of this class represents a daset identified by a
-#'   list of features and a name.
+#'   list of features and a name. Always use \code{\link{dataset.new}} to
+#'   instantiate this class, never the direct constructor.
 #' @slot name the name of this dataset
 #' @slot features a list of name-value pairs denoting the features of the
 #'   dataset
@@ -28,7 +29,7 @@ dataset <- setClass(
     l <- length(object@features);
     if(l > 0L) {
       nams <- names(object@features);
-      if(length(nams) != l) {
+      if(length(unique(nams)) != l) {
         return("All features must be uniquely named.");
       }
       for(nam in nams) {

@@ -5,7 +5,7 @@
 \title{Create a Combination or Selection of \code{\link{dataset}s}}
 \usage{
 datasets.merge.by.features(datasets, features.ignore = NULL,
-  features.keep = NULL, data.name = datasets.joinNames,
+  features.keep = NULL, data.name = datasets.names.join,
   data.merge = .data.merge, data.create = dataset.new)
 }
 \arguments{
@@ -18,7 +18,7 @@ datasets.merge.by.features(datasets, features.ignore = NULL,
 \code{NULL} if all non-deleted features should be kept}
 
 \item{data.name}{a function used to join names of datasets that now have
-identical features, see \code{\link{datasets.joinNames}} for documentation}
+identical features, see \code{\link{datasets.names.join}} for documentation}
 
 \item{data.merge}{a function for merging the \code{data} lists; by default
 \code{unlist(x, recursive=FALSE)}}

@@ -5,8 +5,8 @@
 #' @param names the vector of names
 #' @param features the vector of feature values
 #' @return a single string of the common name components only
-#' @export datasets.joinNames
-datasets.joinNames <- function(names, features=NULL) {
+#' @export datasets.names.join
+datasets.names.join <- function(names, features=NULL) {
   l <- length(names);
   if(l <= 0L) { return("unnamed"); }
   if(l <= 1L) { return(names[[1L]]); }

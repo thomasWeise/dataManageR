@@ -5,13 +5,13 @@
 #' @param datasets the list of \code{\link{dataset}s} instances
 #' @return a list of \code{\link{dataset}s} instances where no name appears
 #'   twice
-#' @include names.R
+#' @include getNames.R
 #' @include dataset.R
-#' @export datasets.make.names.unique
-datasets.make.names.unique <- function(datasets) {
+#' @export datasets.names.make.unique
+datasets.names.make.unique <- function(datasets) {
   datasets.length <- length(datasets);
   if(datasets.length > 1L) {
-    names <- datasets.names(datasets);
+    names <- datasets.names.get(datasets);
     count <- vapply(X=names, FUN=function(name) sum(names==name), FUN.VALUE=0L);
     index <- rep(x=1L, times=datasets.length);
     if(max(count) > 1L) {

@@ -8,7 +8,8 @@
   Features}
 \description{
 Each instance of this class represents a daset identified by a
-  list of features and a name.
+  list of features and a name. Always use \code{\link{dataset.new}} to
+  instantiate this class, never the direct constructor.
 }
 \section{Slots}{
 

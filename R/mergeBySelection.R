@@ -37,7 +37,7 @@
   # create result list
   result <- unname(unlist(result, recursive = TRUE));
   # make sure that all datasets have unique names
-  result <- datasets.make.names.unique(result);
+  result <- datasets.names.make.unique(result);
   result <- force(result);
   return(result);
 }
@@ -50,7 +50,7 @@
 #' @param selection a list of vectors of model indexes. \code{\link{dataset}s}
 #'   in the same index are joined
 #' @param data.name a function used to join names of datasets that now have
-#'   identical features, see \code{\link{datasets.joinNames}} for documentation
+#'   identical features, see \code{\link{datasets.names.join}} for documentation
 #' @param data.merge a function for merging the \code{data} lists; by default
 #'   \code{unlist(x, recursive=FALSE)}
 #' @param data.create a function for creating new datasets, by default
@@ -65,7 +65,7 @@
 #' @include joinNames.R
 datasets.merge.by.selection <- function(datasets,
                                         selection=seq_along(datasets),
-                                        data.name=datasets.joinNames,
+                                        data.name=datasets.names.join,
                                         data.merge=.data.merge,
                                         data.create=dataset.new) {
   # if there are no datasets, we are done here

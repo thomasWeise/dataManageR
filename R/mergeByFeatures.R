@@ -10,7 +10,7 @@
 #' @param features.keep a vector of the names of the (only) features to keep, or
 #'   \code{NULL} if all non-deleted features should be kept
 #' @param data.name a function used to join names of datasets that now have
-#'   identical features, see \code{\link{datasets.joinNames}} for documentation
+#'   identical features, see \code{\link{datasets.names.join}} for documentation
 #' @param data.merge a function for merging the \code{data} lists; by default
 #'   \code{unlist(x, recursive=FALSE)}
 #' @param data.create a function for creating new datasets, by default
@@ -27,7 +27,7 @@
 datasets.merge.by.features <- function(datasets,
                                        features.ignore=NULL,
                                        features.keep=NULL,
-                                       data.name=datasets.joinNames,
+                                       data.name=datasets.names.join,
                                        data.merge=.data.merge,
                                        data.create=dataset.new) {
   # if there are no datasets, we are done here

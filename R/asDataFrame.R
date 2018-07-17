@@ -9,13 +9,13 @@
 #' @export datasets.as.data.frame
 #' @include featureNames.R
 #' @include featureValues.R
-#' @include names.R
+#' @include getNames.R
 datasets.as.data.frame <- function(datasets, stringsAsFactors=TRUE) {
   features <- datasets.featureNames(datasets);
   values <- lapply(X=features, FUN=function(feature) datasets.featureValues(datasets, feature));
   values$stringsAsFactors <- stringsAsFactors;
   frame <- do.call(cbind.data.frame, values);
   names(frame) <- features;
-  rownames(frame) <- datasets.names(datasets);
+  rownames(frame) <- datasets.names.get(datasets);
   return(frame);
 }
