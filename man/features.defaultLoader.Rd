@@ -10,6 +10,8 @@ features.defaultLoader(featureFolder, components, values.eval = TRUE)
 \item{featureFolder}{the folder with the features}
 
 \item{components}{the components}
+
+\item{values.eval}{the evaluated values}
 }
 \value{
 a named list, where the names are the feature names and the values
