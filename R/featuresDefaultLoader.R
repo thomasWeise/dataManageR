@@ -8,5 +8,5 @@
 #' @param values.eval the evaluated values
 #' @return a named list, where the names are the feature names and the values
 #'   the corresponding feature values
-#' @export features.defaultLoader
-features.defaultLoader <-  features.txtLoader
+#' @export datasets.feature.load.default
+datasets.feature.load.default <-  datasets.feature.load.text

@@ -11,9 +11,9 @@
 #' @param values.eval the evaluated values
 #' @return a named list, where the names are the feature names and the values
 #'   the corresponding feature values
-#' @export features.txtLoader
+#' @export datasets.feature.load.text
 #' @importFrom utils read.table
-features.txtLoader <- function(featureFolder, components, values.eval=TRUE) {
+datasets.feature.load.text <- function(featureFolder, components, values.eval=TRUE) {
   # only if the features folder exists...
   if(dir.exists(featureFolder)) {
     # ...we iterate over all components
@@ -40,6 +40,14 @@ features.txtLoader <- function(featureFolder, components, values.eval=TRUE) {
                                             parsed <- parse(text=value);
                                             envx <- new.env();
                                             result <- eval(parsed, envir=envx, enclos=envx);
+                                            if(is.numeric(result) && is.finite(result)) {
+                                              suppressWarnings({
+                                                test <- as.integer(result);
+                                                if(test == result) {
+                                                  return(test);
+                                                }
+                                              });
+                                            }
                                             return(result);
                                             }, silent=TRUE);
                                           return(value);
@@ -52,7 +60,16 @@ features.txtLoader <- function(featureFolder, components, values.eval=TRUE) {
                       }
                     }), recursive=FALSE, use.names=TRUE));
 
-    if(!(is.null(result))) { return(result); }
+    if(!(is.null(result))) {
+      nr <- names(result);
+      len <- length(unique(nr));
+      if(len != length(nr)) {
+        stop("All names must be unique.");
+      }
+
+      result <- result[order(nr)];
+      return(result);
+    }
   }
   return(list());
 }
