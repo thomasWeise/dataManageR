@@ -7,7 +7,7 @@ test_that("Test datasets.feature.load.text", {
 
   component.1 <- "aa";
   f1 <- file.path(featuresFolder, paste(component.1, ".txt", sep="", collapse=""));
-  f <- file(f2, open="wt");
+  f <- file(f1, open="wt");
   writeLines(con=f,
              text=c("a=1", "b=HALLO", "c=FALSE"));
   close(f);
