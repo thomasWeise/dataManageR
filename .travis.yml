@@ -9,4 +9,13 @@ r:
   - release
   - devel
 after_script:
-  - R -e 'r<-devtools::install_github("thomasWeise/dataManageR"); if(r) { cat("OK\n"); q(safe="no", status=0); } else { cat("error: ", r, "\n", sep="", collapse=""); q(safe="no", status=1); }'
+  - echo 'remove.packages("dataManageR"'); > script.R
+  - echo 'r <- devtools::install_github("thomasWeise/dataManageR"'); >> script.R
+  - echo 'if(r) {' >> script.R
+  - echo 'cat("OK\n");' >> script.R
+  - echo 'q(safe="no", status=0);' >> script.R
+  - echo '} else {' >> script.R
+  - echo 'cat("error: ", r, "\n", sep="", collapse="");"' >> script.R
+  - echo 'q(safe="no", status=1);' >> script.R
+  - echo '}' >> script.R
+  - R -f script.R
