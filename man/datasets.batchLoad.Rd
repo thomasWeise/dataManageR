@@ -4,8 +4,10 @@
 \alias{datasets.batchLoad}
 \title{Load the a Sequence of \code{\link{dataset}}s}
 \usage{
-datasets.batchLoad(path = getwd(), selector, dataLoader = function(file)
-  read.csv(file), featuresFolder = file.path(path, "../features"),
+datasets.batchLoad(path = getwd(),
+  selector = path.extensionRegExp(extensions = "csv"),
+  dataLoader = function(file) read.csv(file),
+  featuresFolder = file.path(path, "../features"),
   featuresLoader = datasets.feature.load.default, nameProcessor = identity,
   check.directory = NULL, cores = 1L, logging = (cores <= 1L))
 }

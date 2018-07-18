@@ -28,7 +28,7 @@
 #' @importFrom utils read.csv
 #' @export datasets.batchLoad
 datasets.batchLoad <- function(path=getwd(),
-                               selector,
+                               selector=path.extensionRegExp(extensions="csv"),
                                dataLoader=function(file) read.csv(file),
                                featuresFolder=file.path(path, "../features"),
                                featuresLoader=datasets.feature.load.default,
@@ -61,7 +61,7 @@ datasets.batchLoad <- function(path=getwd(),
     ftxt <- if(is.null(featuresFolder)) " without features."
             else paste(" with features from folder ", featuresFolder, ".",
                        sep="", collapse="")
-    logging("now loading datasets from ", source, ftxt);
+    logging("now loading datasets from ", path, ftxt);
   }
 
   nameProcessor   <- force(nameProcessor);
@@ -122,7 +122,7 @@ datasets.batchLoad <- function(path=getwd(),
   file.all <- force(file.all);
 
   # execute the batch process
-  results <- path.batchApply(path=source, file.single=NULL, file.in.folder=file.all,
+  results <- path.batchApply(path=path, file.single=NULL, file.in.folder=file.all,
                              cores=cores, check.directory=check.directory,
                              logging=logging);
 
