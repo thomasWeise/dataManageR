@@ -11,8 +11,8 @@
 #' @include featureValues.R
 #' @include getNames.R
 datasets.as.data.frame <- function(datasets, stringsAsFactors=TRUE) {
-  features <- datasets.featureNames(datasets);
-  values <- lapply(X=features, FUN=function(feature) datasets.featureValues(datasets, feature));
+  features <- datasets.feature.names(datasets);
+  values <- lapply(X=features, FUN=function(feature) datasets.feature.values(datasets, feature));
   values$stringsAsFactors <- stringsAsFactors;
   frame <- do.call(cbind.data.frame, values);
   names(frame) <- features;

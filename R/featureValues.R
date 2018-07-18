@@ -1,9 +1,13 @@
 # check and try to convert a numeric vector to an integer vector
 .check.numeric <- function(vec) {
+  na <- !is.na(vec);
+  if(any(na & (!is.finite(vec)))) { return(vec); }
   suppressWarnings({
     test <- as.integer(vec);
-    if(any(is.na(test) | (!is.finite(test)))) { return(vec); }
-    check <- abs(test - vec);
+    if(any((!is.na(test)) != na)) { return(vec); }
+    if(any(na & !is.finite(test))) { return(vec); }
+
+    check <- abs(test[na] - vec[na]);
     if(any(is.na(check) | (!is.finite(check)))) { return(vec); }
     if(all(check < .Machine$double.eps, na.rm = TRUE)) {
       return(test);
@@ -11,6 +15,7 @@
     return(vec);
   });
 }
+
 
 #' @title Get a Vector with the Values of one Feature for all
 #'   \code{\link{dataset}s}
@@ -20,9 +25,9 @@
 #'   extract the feature names
 #' @param featureName the name of the feature
 #' @return the vector with the values of this feature
-#' @export datasets.featureValues
+#' @export datasets.feature.values
 #' @include dataset.R
-datasets.featureValues <- function(datasets, featureName) {
+datasets.feature.values <- function(datasets, featureName) {
   # get the values
   values <- lapply(X=datasets, FUN=function(ds) {
     value <- ds@features[[featureName]];
@@ -36,10 +41,18 @@ datasets.featureValues <- function(datasets, featureName) {
      return(typeof(value)); }), recursive=TRUE));
 
   tl <- length(types);
+  if(tl <= 0L) {
+    # feature is nowhere defined
+    return(rep(NA, length(datasets)));
+  }
 
   if(tl <= 1L) {
     # if there is only a single type, then we can use this type
-    res <- as.vector(x=values, mode=types[[1L]]);
+    if(types[[1L]] == "character") {
+      res <- vapply(X=values, FUN=as.character, FUN.VALUE=NA_character_);
+    } else {
+      res <- as.vector(x=values, mode=types[[1L]]);
+    }
 
     if(identical(types[[1L]], "double") ||
        identical(types[[1L]], "numeric")) {
@@ -64,5 +77,5 @@ datasets.featureValues <- function(datasets, featureName) {
 
   # more than two types or at least two types and no numerical type: read as
   # character vector
-  return(as.vector(x=values, mode="character"));
+  return(vapply(X=values, FUN=as.character, FUN.VALUE=NA_character_));
 }

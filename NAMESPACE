@@ -2,8 +2,8 @@
 
 export(dataset.new)
 export(datasets.as.data.frame)
-export(datasets.featureNames)
-export(datasets.featureValues)
+export(datasets.feature.names)
+export(datasets.feature.values)
 export(datasets.merge.by.features)
 export(datasets.merge.by.selection)
 export(datasets.names.get)
