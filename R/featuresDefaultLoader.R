@@ -2,7 +2,7 @@
 
 #' @title The Default Loader for Features
 #' @description The default loader for the \code{\link{dataset}} features is the
-#'   \code{\link{features.txtLoader}}
+#'   \code{\link{datasets.feature.load.text}}
 #' @param featureFolder the folder with the features
 #' @param components the components
 #' @param values.eval the evaluated values

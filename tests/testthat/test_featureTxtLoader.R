@@ -6,19 +6,22 @@ test_that("Test datasets.feature.load.text", {
   dir.create(featuresFolder, showWarnings = FALSE, recursive = TRUE);
 
   component.1 <- "aa";
-  f <- file(file.path(featuresFolder, paste(component.1, ".txt", sep="", collapse="")), open="wt");
+  f1 <- file.path(featuresFolder, paste(component.1, ".txt", sep="", collapse=""));
+  f <- file(f2, open="wt");
   writeLines(con=f,
              text=c("a=1", "b=HALLO", "c=FALSE"));
   close(f);
 
   component.2 <- "bb";
-  f <- file(file.path(featuresFolder, paste(component.2, ".txt", sep="", collapse="")), open="wt");
+  f2 <- file.path(featuresFolder, paste(component.2, ".txt", sep="", collapse=""));
+  f <- file(f2, open="wt");
   writeLines(con=f,
              text=c("d=4.4", "e=4"));
   close(f);
 
   component.3 <- "a";
-  f <- file(file.path(featuresFolder, paste(component.3, ".txt", sep="", collapse="")), open="wt");
+  f3 <- file.path(featuresFolder, paste(component.3, ".txt", sep="", collapse=""));
+  f <- file(f3, open="wt");
   writeLines(con=f,
              text=c("a=13", "b=XXX", "c=TRUE"));
   close(f);
@@ -37,5 +40,8 @@ test_that("Test datasets.feature.load.text", {
   expect_error(datasets.feature.load.text(featuresFolder,
                                           c(component.1, component.3)));
 
+  unlink(f1);
+  unlink(f2);
+  unlink(f3);
   unlink(featuresFolder, recursive = TRUE);
 })

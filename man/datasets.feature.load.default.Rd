@@ -19,5 +19,5 @@ a named list, where the names are the feature names and the values
 }
 \description{
 The default loader for the \code{\link{dataset}} features is the
-  \code{\link{features.txtLoader}}
+  \code{\link{datasets.feature.load.text}}
 }
