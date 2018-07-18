@@ -47,8 +47,8 @@
 #' @description Merge a set of \code{\link{dataset}s} according to a given
 #'   selection.
 #' @param datasets the list of instances of \code{\link{dataset}s}
-#' @param selection a list of vectors of model indexes. \code{\link{dataset}s}
-#'   in the same index are joined
+#' @param selection a list of vectors of dataset indexes. \code{\link{dataset}s}
+#'   in the same vector are joined
 #' @param data.name a function used to join names of datasets that now have
 #'   identical features, see \code{\link{datasets.names.join}} for documentation
 #' @param data.merge a function for merging the \code{data} lists; by default

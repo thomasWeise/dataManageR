@@ -11,8 +11,8 @@ datasets.merge.by.selection(datasets, selection = seq_along(datasets),
 \arguments{
 \item{datasets}{the list of instances of \code{\link{dataset}s}}
 
-\item{selection}{a list of vectors of model indexes. \code{\link{dataset}s}
-in the same index are joined}
+\item{selection}{a list of vectors of dataset indexes. \code{\link{dataset}s}
+in the same vector are joined}
 
 \item{data.name}{a function used to join names of datasets that now have
 identical features, see \code{\link{datasets.names.join}} for documentation}
