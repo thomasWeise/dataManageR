@@ -2,9 +2,9 @@ library("dataManageR")
 context("datasets.feature.values")
 
 test_that("Test datasets.feature.values", {
-  ds1 <- dataset.new(name="bla", features=list(c="c", a="a", b="b", f=1.1, g=4.1), data= list(7, 2, c(3, 4), list(a="b")));
-  ds2 <- dataset.new(name="bla", features=list(c="f", d=5, a="g", b=4, f=1, g=4), data= list(7, 2, c(3, 4), list(a="b")));
-  ds3 <- dataset.new(name="bla", features=list(e=4, b=6L, g=5), data= list(7, 2, c(3, 4), list(a="b")));
+  ds1 <- dataset.new(name="bla", features=list(c="c", a="a", b="b", f=1.1, g=4.1, y=TRUE, z=TRUE), data= list(7, 2, c(3, 4), list(a="b")));
+  ds2 <- dataset.new(name="bla", features=list(c="f", d=5, a="g", b=4, f=1, y="FALSE", g=4), data= list(7, 2, c(3, 4), list(a="b")));
+  ds3 <- dataset.new(name="bla", features=list(e=4, b=6L, g=5, z=FALSE), data=list(7, 2, c(3, 4), list(a="b")));
 
   expect_identical(datasets.feature.values(c(ds1, ds2, ds3), "a"), c("a", "g", NA));
   expect_identical(datasets.feature.values(c(ds1, ds3, ds2), "a"), c("a", NA, "g"));
@@ -32,4 +32,9 @@ test_that("Test datasets.feature.values", {
   expect_identical(datasets.feature.values(c(ds1, ds3), "g"), c(4.1, 5));
   expect_identical(datasets.feature.values(c(ds1, ds2), "g"), c(4.1, 4));
   expect_identical(datasets.feature.values(c(ds2, ds1), "g"), c(4, 4.1));
+
+  expect_identical(datasets.feature.values(c(ds1, ds2, ds3), "z"), c(TRUE, NA, FALSE));
+  expect_identical(datasets.feature.values(c(ds1, ds2, ds3), "z"), c(TRUE, NA, FALSE));
+
+  expect_identical(datasets.feature.values(c(ds1, ds2, ds3), "y"), c("TRUE", "FALSE", NA));
 })
