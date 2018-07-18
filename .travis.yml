@@ -9,4 +9,4 @@ r:
   - release
   - devel
 after_script:
-  - R -e 'devtools::install_github("thomasWeise/dataManageR")'
+  - R -e 'r<-devtools::install_github("thomasWeise/dataManageR"); if(r) { q(safe="no", status=0); } q(safe="no", status=1);'
