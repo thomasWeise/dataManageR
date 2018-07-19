@@ -33,3 +33,5 @@ Collate:
     'joinNames.R'
     'mergeBySelection.R'
     'mergeByFeatures.R'
+    'selectByFeatures.R'
+    'selectByName.R'
