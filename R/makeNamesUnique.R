@@ -7,6 +7,7 @@
 #'   twice
 #' @include getNames.R
 #' @include dataset.R
+#' @include defaultNamer.R
 #' @export datasets.names.make.unique
 datasets.names.make.unique <- function(datasets) {
   datasets.length <- length(datasets);

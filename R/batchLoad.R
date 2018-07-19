@@ -1,7 +1,3 @@
-#' @include dataset.R
-#' @include featuresDefaultLoader.R
-#' @include makeNamesUnique.R
-
 #' @title Load the a Sequence of \code{\link{dataset}}s
 #' @description Load all the \code{\link{dataset}}s from a folder structure.
 #' @param path the source folder
@@ -15,8 +11,8 @@
 #'   \code{featureFolder} and \code{components} and returning a named list of
 #'   features, or \code{NULL} if no features are needed. see
 #'   \code{\link{datasets.feature.load.default}} for documentation
-#' @param nameProcessor a function which receives a relativized path to the
-#'   folder with the current model(s) and returns a name for the models
+#' @param namer receives the name components, i.e., the directory names and can
+#'   add, delete, or modify elements of the vector the name
 #' @param check.directory a function which can choose if a directory should be
 #'   followed or not
 #' @param cores the number of cores to be used for loading
@@ -24,15 +20,20 @@
 #'   printing to the console via \code{\link{print}}, \code{FALSE} for no
 #'   logging, or a path to a file receiving logging information
 #' @return a list of \code{\link{dataset}s} instances
-#' @importFrom utilizeR path.batchApply path.extensionRegExp makeLogger path.relativize
+#' @importFrom utilizeR path.batchApply path.extensionRegExp makeLogger
+#'   path.relativize
 #' @importFrom utils read.csv
 #' @export datasets.batchLoad
+#' @include dataset.R
+#' @include featuresDefaultLoader.R
+#' @include makeNamesUnique.R
+#' @include defaultNamer.R
 datasets.batchLoad <- function(path=getwd(),
                                selector=path.extensionRegExp(extensions="csv"),
                                dataLoader=function(file) read.csv(file),
                                featuresFolder=file.path(path, "../features"),
                                featuresLoader=datasets.feature.load.default,
-                               nameProcessor=identity,
+                               namer=datasets.names.namer,
                                check.directory=NULL,
                                cores=1L,
                                logging=(cores <= 1L)) {
@@ -64,7 +65,7 @@ datasets.batchLoad <- function(path=getwd(),
     logging("now loading datasets from ", path, ftxt);
   }
 
-  nameProcessor   <- force(nameProcessor);
+  namer           <- force(namer);
   check.directory <- force(check.directory);
   cores           <- force(cores);
   dataLoader      <- force(dataLoader);
@@ -73,7 +74,7 @@ datasets.batchLoad <- function(path=getwd(),
   loader <- function(root, paths) {
     root           <- force(root);
     paths          <- force(paths);
-    nameProcessor  <- force(nameProcessor);
+    namer          <- force(namer);
     featuresFolder <- force(featuresFolder);
     featuresLoader <- force(featuresLoader);
     dataLoader     <- force(dataLoader);
@@ -91,21 +92,21 @@ datasets.batchLoad <- function(path=getwd(),
     }
 
     # first we extract the name part from the directory
-    name <- path.relativize(dirname(paths[1L]), root);
+    name       <- path.relativize(dirname(paths[1L]), root);
+    # split the name into its components
+    components <- unname(unlist(strsplit(name, "/"), recursive = TRUE));
 
     # now: de we need to apply the features loader
     if(!(is.null(featuresFolder) || is.null(featuresLoader))) {
-      # yes, so first split the name
-      components <- unname(unlist(strsplit(name, "/"), recursive = TRUE));
-      features   <- featuresLoader(featuresFolder, components);
+      features <- featuresLoader(featuresFolder, components);
     } else {
       features <- list();
     }
 
     # ok, we have results, so now we need to create the name
-    name <- nameProcessor(name);
-    if(is.null(names) || (nchar(name) <= 0L)) {
-      names <- "unnamed"; # if there are no names, use "unnamed"
+    name <- namer(components);
+    if(is.null(name) || (length(name)<=0L) || (nchar(name) <= 0L)) {
+      name <- .name.undefined; # if there are no names, use "unnamed"
     }
 
     # create and return the results record

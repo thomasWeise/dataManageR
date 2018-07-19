@@ -26,6 +26,7 @@ Collate:
     'featureValues.R'
     'featureNames.R'
     'asDataFrame.R'
+    'defaultNamer.R'
     'makeNamesUnique.R'
     'featuresTxtLoader.R'
     'featuresDefaultLoader.R'
