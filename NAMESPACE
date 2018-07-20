@@ -2,6 +2,7 @@
 
 export(dataset.new)
 export(datasets.as.data.frame)
+export(datasets.as.lists)
 export(datasets.batchLoad)
 export(datasets.feature.load.default)
 export(datasets.feature.load.text)
