@@ -1,7 +1,7 @@
 Package: dataManageR
 Type: Package
 Title: An R Package for Loading and Processing Hierarchically Structured and Named Datasets Annotated with Features
-Version: 0.8.0
+Version: 0.8.1
 Author: Dr. Thomas Weise <tweise@hfuu.edu.cn>
 Maintainer: Dr. Thomas Weise <tweise@hfuu.edu.cn>
 Description: The goal of this package is to provide a simple way to load and process hierarchically structured and named datasets.

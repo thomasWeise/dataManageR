@@ -4,16 +4,19 @@
 \alias{datasets.select.by.features}
 \title{Select a Dataset by Features}
 \usage{
-datasets.select.by.features(datasets, features, getIndex = FALSE)
+datasets.select.by.features(datasets, include = list(), exclude = list(),
+  getIndex = FALSE)
 }
 \arguments{
 \item{datasets}{the list of \code{\link{dataset}} instances}
 
-\item{features}{a list with named elements, we only return datasets where all features match}
-
 \item{getIndex}{if \code{FALSE} (by default), this function returns the
 datasets with the matching features; if \code{TRUE}, just the indexes of the
 datasets is returned.}
+
+\item{feature.include}{a list with named elements, we only return datasets where all features match}
+
+\item{feature.exclude}{a list with named elements, we only return datasets where all features match}
 }
 \value{
 the datasets whose features match \code{features} (\code{getIndex==FALSE})
@@ -21,10 +24,19 @@ the datasets whose features match \code{features} (\code{getIndex==FALSE})
   the given features
 }
 \description{
-Return the datasets whose features match the provided features,
+Return the datasets whose features match the provided feature restrctions,
   or their indexes (if {@code getIndex==TRUE)}). This function returns a list
   of only the datasets whose features match to all the constraints given in
-  \code{features}. Each element of \code{features} must be named and the name
+  \code{feature.include} and \code{exclude}.
+  Each element of \code{include} and \code{exclude} must be named and the name
   refers to a feature in the dataset. The values of the features can be
-  provided as list or vector of allowed values.
+  provided as list or vector of allowed values. A dataset is only returned if
+  \itemize{
+  \item For each tuple \code{a=b} in \code{include}, the feature of
+  name \code{a} of the dataset has one value from \code{b}. \code{b} can
+  either be a single value, a vector, or a list.
+  \item For each tuple \code{c=d} in \code{exclude}, the feature of
+  name \code{c} of the dataset has one value from \code{d}. \code{d} can
+  either be a single value, a vector, or a list.
+  }
 }

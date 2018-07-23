@@ -8,13 +8,29 @@ test_that("datasets.select.by.name", {
 
   l <- c(ds1, ds2, ds3);
 
-  expect_identical(datasets.select.by.name(l, "bla.1", getIndex=FALSE), ds1);
-  expect_identical(datasets.select.by.name(l, "bla.1", getIndex=TRUE), 1L);
-  expect_identical(datasets.select.by.name(l, "bla.2", getIndex=FALSE), ds2);
-  expect_identical(datasets.select.by.name(l, "bla.2", getIndex=TRUE), 2L);
-  expect_identical(datasets.select.by.name(l, "bla.3", getIndex=FALSE), ds3);
-  expect_identical(datasets.select.by.name(l, "bla.3", getIndex=TRUE), 3L);
+  expect_identical(datasets.select.by.name(l, "bla.1", getIndex=FALSE), c(ds1));
+  expect_identical(datasets.select.by.name(l, "bla.1", getIndex=TRUE), c(1L));
+  expect_identical(datasets.select.by.name(l, "bla.2", getIndex=FALSE), c(ds2));
+  expect_identical(datasets.select.by.name(l, "bla.2", getIndex=TRUE), c(2L));
+  expect_identical(datasets.select.by.name(l, "bla.3", getIndex=FALSE), c(ds3));
+  expect_identical(datasets.select.by.name(l, "bla.3", getIndex=TRUE), c(3L));
 
-  expect_identical(datasets.select.by.name(l, "bla.x3", getIndex=FALSE), NULL);
-  expect_identical(datasets.select.by.name(l, "bla.x3", getIndex=TRUE), NULL);
+  expect_identical(datasets.select.by.name(l, "bla.x3", getIndex=FALSE), list());
+  expect_identical(datasets.select.by.name(l, "bla.x3", getIndex=TRUE), integer(0));
+
+  expect_identical(datasets.select.by.name(l, c("bla.1", "bla.2"), getIndex=FALSE), c(ds1, ds2));
+  expect_identical(datasets.select.by.name(l, c("bla.1", "bla.2"), getIndex=TRUE), c(1L, 2L));
+  expect_identical(datasets.select.by.name(l, c("bla.2", "bla.3"), getIndex=FALSE), c(ds2,ds3));
+  expect_identical(datasets.select.by.name(l, c("bla.2", "bla.3"), getIndex=TRUE), c(2L, 3L));
+  expect_identical(datasets.select.by.name(l, c("bla.3", "bla.1"), getIndex=FALSE), c(ds1, ds3));
+  expect_identical(datasets.select.by.name(l, c("bla.3", "bla.1"), getIndex=TRUE), c(1L, 3L));
+
+
+  expect_identical(datasets.select.by.name(l, exclude=c("bla.3", "bla.1"), getIndex=FALSE), c(ds2));
+  expect_identical(datasets.select.by.name(l, exclude=c("bla.3", "bla.1"), getIndex=TRUE), c(2L));
+  expect_identical(datasets.select.by.name(l, exclude=c("bla.3"), getIndex=FALSE), c(ds1, ds2));
+  expect_identical(datasets.select.by.name(l, exclude=c("bla.3"), getIndex=TRUE), c(1L, 2L));
+
+  expect_identical(datasets.select.by.name(l, include=c("bla.2", "bla.1"), exclude=c("bla.3", "bla.1"), getIndex=FALSE), c(ds2));
+  expect_identical(datasets.select.by.name(l, include="bla.1", exclude=c("bla.3", "bla.1"), getIndex=TRUE), integer(0L));
 })

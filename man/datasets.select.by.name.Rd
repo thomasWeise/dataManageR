@@ -2,25 +2,30 @@
 % Please edit documentation in R/selectByName.R
 \name{datasets.select.by.name}
 \alias{datasets.select.by.name}
-\title{Select a Dataset by Name}
+\title{Select a Datasets by Name}
 \usage{
-datasets.select.by.name(datasets, name, getIndex = FALSE)
+datasets.select.by.name(datasets, include = NULL, exclude = list(),
+  getIndex = FALSE)
 }
 \arguments{
 \item{datasets}{the list of \code{\link{dataset}} instances}
 
-\item{name}{the name we are looking for}
+\item{include}{the names we are looking for: if this is not \code{NULL}, then
+only datasets with a name in this list will be returned}
+
+\item{exclude}{the names we do not want: if this is not \code{NULL}, then
+only datasets whose name does not appear in this list will be permitted}
 
 \item{getIndex}{if \code{FALSE} (by default), this function returns the
-dataset with the matching name; if \code{TRUE}, just the index of the
-dataset is returned.}
+datasets with the matching name; if \code{TRUE}, just the indexes of the
+datasets are returned.}
 }
 \value{
-the dataset whose name matches \code{name} (\code{getIndex==FALSE})
-  or its index (\code{getIndex==TRUE}); or \code{NULL} if no dataset matches
-  the given name
+the dataset whose names match \code{name} (\code{getIndex==FALSE}) or
+  their indexes (\code{getIndex==TRUE})
 }
 \description{
-Return the dataset whose name matches the provided name, or its
-  index (if {@code getIndex==TRUE)}).
+Return the datasets whose names matches the provided
+  \code{include} names while being different from the \code{exclude} names.
+  If {@code getIndex==TRUE)}, return their indices instead.
 }
