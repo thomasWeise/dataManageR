@@ -1,28 +1,28 @@
 #' @title Select a Dataset by Features
-#' @description Return the datasets whose features match the provided feature restrctions,
-#'   or their indexes (if {@code getIndex==TRUE)}). This function returns a list
-#'   of only the datasets whose features match to all the constraints given in
-#'   \code{feature.include} and \code{exclude}.
-#'   Each element of \code{include} and \code{exclude} must be named and the name
+#' @description Return the datasets whose features match the provided feature
+#'   restrctions, or their indexes (if {@code getIndex==TRUE)}). This function
+#'   returns a list of only the datasets whose features match to all the
+#'   constraints given in \code{feature.include} and \code{exclude}. Each
+#'   element of \code{include} and \code{exclude} must be named and the name
 #'   refers to a feature in the dataset. The values of the features can be
 #'   provided as list or vector of allowed values. A dataset is only returned if
-#'   \itemize{
-#'   \item For each tuple \code{a=b} in \code{include}, the feature of
+#'   \itemize{ \item For each tuple \code{a=b} in \code{include}, the feature of
 #'   name \code{a} of the dataset has one value from \code{b}. \code{b} can
-#'   either be a single value, a vector, or a list.
-#'   \item For each tuple \code{c=d} in \code{exclude}, the feature of
-#'   name \code{c} of the dataset has one value from \code{d}. \code{d} can
-#'   either be a single value, a vector, or a list.
-#'   }
+#'   either be a single value, a vector, or a list. \item For each tuple
+#'   \code{c=d} in \code{exclude}, the feature of name \code{c} of the dataset
+#'   has one value from \code{d}. \code{d} can either be a single value, a
+#'   vector, or a list. }
 #' @param datasets the list of \code{\link{dataset}} instances
-#' @param feature.include a list with named elements, we only return datasets where all features match
-#' @param feature.exclude a list with named elements, we only return datasets where all features match
+#' @param include a list with named elements, we only return datasets where all
+#'   features match
+#' @param exclude a list with named elements, we only return datasets where all
+#'   features match
 #' @param getIndex if \code{FALSE} (by default), this function returns the
-#'   datasets with the matching features; if \code{TRUE}, just the indexes of the
-#'   datasets is returned.
-#' @return the datasets whose features match \code{features} (\code{getIndex==FALSE})
-#'   or their indexes (\code{getIndex==TRUE}); or an empty list if no dataset matches
-#'   the given features
+#'   datasets with the matching features; if \code{TRUE}, just the indexes of
+#'   the datasets is returned.
+#' @return the datasets whose features match \code{features}
+#'   (\code{getIndex==FALSE}) or their indexes (\code{getIndex==TRUE}); or an
+#'   empty list if no dataset matches the given features
 #' @export datasets.select.by.features
 datasets.select.by.features <- function(datasets, include=list(), exclude=list(), getIndex=FALSE) {
 
