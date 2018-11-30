@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.names.make.unique")
 
 test_that("datasets.names.make.unique", {

@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.feature.load.text")
 
 test_that("Test datasets.feature.load.text", {

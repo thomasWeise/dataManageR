@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.select.by.name")
 
 test_that("datasets.select.by.name", {

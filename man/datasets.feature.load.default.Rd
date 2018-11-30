@@ -4,7 +4,8 @@
 \alias{datasets.feature.load.default}
 \title{The Default Loader for Features}
 \usage{
-datasets.feature.load.default(featureFolder, components, values.eval = TRUE)
+datasets.feature.load.default(featureFolder, components,
+  values.eval = TRUE)
 }
 \arguments{
 \item{featureFolder}{the folder with the features}

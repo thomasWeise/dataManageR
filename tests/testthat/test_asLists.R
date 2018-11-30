@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.as.data.frame")
 
 test_that("datasets.as.data.frame", {

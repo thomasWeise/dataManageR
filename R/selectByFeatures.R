@@ -1,6 +1,6 @@
 #' @title Select a Dataset by Features
 #' @description Return the datasets whose features match the provided feature
-#'   restrctions, or their indexes (if {@code getIndex==TRUE)}). This function
+#'   restrictions, or their indexes (if {@code getIndex==TRUE)}). This function
 #'   returns a list of only the datasets whose features match to all the
 #'   constraints given in \code{feature.include} and \code{exclude}. Each
 #'   element of \code{include} and \code{exclude} must be named and the name

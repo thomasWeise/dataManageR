@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.merge.by.selection")
 
 

@@ -4,8 +4,8 @@
 \alias{datasets.select.by.features}
 \title{Select a Dataset by Features}
 \usage{
-datasets.select.by.features(datasets, include = list(), exclude = list(),
-  getIndex = FALSE)
+datasets.select.by.features(datasets, include = list(),
+  exclude = list(), getIndex = FALSE)
 }
 \arguments{
 \item{datasets}{the list of \code{\link{dataset}} instances}
@@ -27,7 +27,7 @@ the datasets whose features match \code{features}
 }
 \description{
 Return the datasets whose features match the provided feature
-  restrctions, or their indexes (if {@code getIndex==TRUE)}). This function
+  restrictions, or their indexes (if {@code getIndex==TRUE)}). This function
   returns a list of only the datasets whose features match to all the
   constraints given in \code{feature.include} and \code{exclude}. Each
   element of \code{include} and \code{exclude} must be named and the name

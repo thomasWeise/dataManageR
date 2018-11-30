@@ -1,6 +1,7 @@
 #' @include dataset.R
 #' @include joinNames.R
 #' @include mergeBySelection.R
+#' @include featuresUnique.R
 
 #' @title Create a Combination or Selection of \code{\link{dataset}s}
 #' @description Merge a set of \code{\link{dataset}s} according to a given name transformation.
@@ -37,53 +38,35 @@ datasets.merge.by.features <- function(datasets,
     return(list(datasets=.tmp, selection=.tmp));
   }
 
-  # check the parameters
-  if(length(features.ignore) <= 0L) {
-    features.ignore <- NULL;
-  }
-  if(length(features.keep) <= 0L) {
-    features.keep <- NULL;
-  }
-
-  # compute all the feature vectors
-  features.all <- lapply(X=datasets, FUN=function(ds) {
-    features <- ds@features;
-    if(!is.null(features.keep)) {
-      features <- features[features.keep];
-    }
-    if(!is.null(features.ignore)) {
-      features <- features[is.na(match(names(features), features.ignore))];
-    }
-    return(features);
-    });
-
-  # find the unique feature vectors
-  features.unique <- unique(features.all);
-  m               <- length(features.unique);
+  # get the feature combinations
+  found <- datasets.features.unique(datasets=datasets,
+                                    features.ignore=features.ignore,
+                                    features.keep=features.keep);
+  found <- force(found);
+  m     <- length(found$features);
 
   # if the list length is the same, we just update the names
   if(m >= n) {
-    selection <- seq_len(n);
-    return(list(datasets = unname(unlist(lapply(X=selection, FUN=function(i) {
+    ds <- unname(unlist(lapply(X=found$selection, FUN=function(i) {
       return(data.create(name=data.name(datasets[[i]]@name),
-                   features=features.all[[i]],
-                   data=datasets[[i]]@data));
-    }), recursive = TRUE)),
-    selection=selection));
-  }
+                         features=found$features[[i]],
+                         data=datasets[[i]]@data));
+    }), recursive = TRUE));
+    ds <- force(ds);
 
-  # create the selections: for each unique feature composition, compute the
-  # vector of indices of datasets that should be merged
-  selection <- lapply(X=features.unique, FUN=function(features)
-                which(vapply(X=features.all, FUN=identical, FUN.VALUE=FALSE, features)));
+    result <- list(datasets=ds, selection=found$selection);
+    result <- force(result);
+  }
 
   # invoke the merging algorithm
   result <- .datasets.merge.by.selection(datasets=datasets,
-                                         selection=selection,
+                                         selection=found$selection,
                                          data.name=data.name,
-                                         features.unique=features.unique,
+                                         features.unique=found$features,
                                          data.merge=data.merge,
                                          data.create=data.create);
   result <- force(result);
-  return(list(datasets=result, selection=selection));
+  result <- list(datasets=result, selection=found$selection);
+  result <- force(result);
+  return(result);
 }

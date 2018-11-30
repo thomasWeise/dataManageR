@@ -1,4 +1,5 @@
 library("dataManageR")
+library("testthat")
 context("datasets.names.join")
 
 test_that("Test datasets.names.join", {
